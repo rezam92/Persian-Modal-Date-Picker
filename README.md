@@ -1,6 +1,13 @@
 # shamsi_date_picker
 
-ShamsiDatePicker
+ShamsiDatePicker is BottomModalSheet Jalali calendar which is used to select Jalali date.
+
+- Jalali Date
+- Set initial date
+- Forward/backward selector
+- Use custom validator for date
+
+
 
 ## Getting Started
 
