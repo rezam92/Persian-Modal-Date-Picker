@@ -8,8 +8,32 @@ ShamsiDatePicker is BottomModalSheet Jalali calendar which is used to select Jal
 - Use custom validator for date
 
 
-<img src="./images/image.png" width="209" height="400">
+<img src="./images/image.png" width="209" height="400" alt="image">
 
+##Usage
+```
+await showPersianDatePicker(
+      context,
+      (context, Date date) async {
+        setState(() {
+          _selectedDate = date;
+        });
+        Navigator.of(context).pop();
+      },
+      forwardYear: true,
+      border: BorderRadius.only(
+          topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+      validate: (ctx, date) {
+        return date.year < 1402;
+      },
+      submitButtonStyle: defaultButtonsStyle.copyWith(
+        text: 'انتخاب',
+        backgroundColor: Colors.blueAccent,
+        radius: 10,
+      ),
+    );
+```
+##Properties
 
 ## Getting Started
 
