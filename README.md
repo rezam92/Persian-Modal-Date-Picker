@@ -36,7 +36,7 @@ await showPersianDatePicker(
 ## Parameters
 `showPersianDatePicker(context, onSubmit, {/* ohter optional parameter*/});`
 
-| Parameters |Type| Is Required      | Description |
+| Parameters |Type| Is Required  | Description |
 | ----------- |----| ----------- | ----------- |
 | context    | BuildContext | Yes ||
 | onSubmit   | Future<void> Function(BuildContext context, Jalali date) | Yes |Callback function when a date is selected|
@@ -44,12 +44,21 @@ await showPersianDatePicker(
 |initMonth|int|No|As the same as `initYear`|
 |initDay|int|No|As the same as `initYear`|
 |border|BorderRadiusGeometry|No|Optional BorderRadius|
-|forwardYear|YearDirection|No|select year direction|
+|yearDirection|YearDirection|No|select year direction. Values are `YearDirection.backward`, `YearDirection.forward` and `YearDirection.both`|
 |backgroundColor|Color|No||
-|margin|EdgeInsets|No||
-|submitButtonStyle|ButtonsStyle|No||
-|cancelButtonStyle|ButtonsStyle|No||
-|validate|bool Function(BuildContext context, Jalali date)|No||
+|margin|EdgeInsets|No|Date Picker margin|
+|submitButtonStyle|ButtonsStyle|No|Style of submit bottom|
+|cancelButtonStyle|ButtonsStyle|No|Style of cancel bottom|
+|validate|bool Function(BuildContext context, Jalali date)|No|You can provide a validate function to check if the selected date is correct or not|
+
+#### The _ButtonsStyle_ class
+| Parameters |Type| Is Required  | Description |
+| ----------- |----| ----------- | ----------- |
+|backgroundColor|Color|No|Default value is `Colors.white`|
+|textColor|Color|No|Default value is `Colors.black`|
+|radius|double|No|Default value is `5.0`|
+|visible|bool|No|Default value is `true`|
+|text|String|Yes|Default value is `''`|
 ## Getting Started
 
 This project is a starting point for a Dart
