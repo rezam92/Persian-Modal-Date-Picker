@@ -4,11 +4,12 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 import 'button.dart';
 
-enum YearDirection{
+enum YearDirection {
   backward,
   forward,
   both,
 }
+
 ButtonsStyle get defaultButtonsStyle => const ButtonsStyle(
       backgroundColor: Colors.white,
       textColor: Colors.black,
@@ -157,15 +158,15 @@ class _DatePickerModalState extends State<DatePickerModal> {
 
     if (widget.yearDirection == YearDirection.forward)
       yearController = FixedExtentScrollController(initialItem: 0);
-    else if (widget.yearDirection == YearDirection.both){
+    else if (widget.yearDirection == YearDirection.both) {
       yearController = FixedExtentScrollController(
         initialItem: 100,
       );
-    }
-    else {
+    } else {
       yearController = FixedExtentScrollController(
         initialItem: (100 -
-                    (Jalali.now().year - (widget.initYear ?? Jalali.now().year))) >
+                    (Jalali.now().year -
+                        (widget.initYear ?? Jalali.now().year))) >
                 0
             ? (100 -
                 (Jalali.now().year - (widget.initYear ?? Jalali.now().year)))
@@ -302,7 +303,8 @@ class _DatePickerModalState extends State<DatePickerModal> {
                           onSelectedItemChanged: (value) {
                             setState(() {
                               dayController?.jumpTo(1);
-                              if (widget.yearDirection == YearDirection.forward) {
+                              if (widget.yearDirection ==
+                                  YearDirection.forward) {
                                 jalali = jalali
                                     .withYear((Jalali.now().year) + value);
                                 return;
@@ -311,12 +313,17 @@ class _DatePickerModalState extends State<DatePickerModal> {
                                   .withYear((Jalali.now().year - 100) + value);
                             });
                           },
-                          childCount: widget.yearDirection == YearDirection.both ? 201 : 101,
+                          childCount: widget.yearDirection == YearDirection.both
+                              ? 201
+                              : 101,
                           itemBuilder: (context, index) => Container(
                             height: 20,
                             alignment: Alignment.center,
                             child: Text(
-                                ((widget.yearDirection == YearDirection.forward ? Jalali.now().year : (Jalali.now().year - 100)) + index)
+                                ((widget.yearDirection == YearDirection.forward
+                                            ? Jalali.now().year
+                                            : (Jalali.now().year - 100)) +
+                                        index)
                                     .toString(),
                                 style: Theme.of(context)
                                     .textTheme

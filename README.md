@@ -1,6 +1,6 @@
-# shamsi_date_picker
+# Persian Modal Date Picker
 
-ShamsiDatePicker is BottomModalSheet Jalali calendar which is used to select Jalali date.
+Persian_Modal_Date_Picker is a modal date picker which is used to select Jalali date.
 
 - Jalali Date
 - Set initial date
@@ -8,7 +8,7 @@ ShamsiDatePicker is BottomModalSheet Jalali calendar which is used to select Jal
 - Use custom validator for date
 
 
-<img src="./images/image.png" alt="image" width="300">
+<img src="https://raw.githubusercontent.com/rezam92/Persian-Modal-Date-Picker/main/images/image.png" alt="image" width="300">
 
 ## Usage
 ```

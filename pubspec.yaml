@@ -1,6 +1,6 @@
 name: persian_modal_date_picker
-description: Persian modal date picker
-version: 0.0.1
+description: Persian modal date picker. You can use this package to select Jalali date using `BottomModalSheet`
+version: 0.0.3
 homepage: https://github.com/rezam92/Persian-Modal-Date-Picker
 
 environment:
