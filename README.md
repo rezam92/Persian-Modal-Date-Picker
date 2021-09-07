@@ -8,7 +8,7 @@ ShamsiDatePicker is BottomModalSheet Jalali calendar which is used to select Jal
 - Use custom validator for date
 
 
-<img src="./images/image.png" alt="image" width="648">
+<img src="./images/image.png" alt="image" width="300">
 
 ## Usage
 ```
