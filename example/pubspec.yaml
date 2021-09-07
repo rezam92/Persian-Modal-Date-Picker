@@ -33,7 +33,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   shamsi_date: ^0.15.0
-  shamsi_date_picker:
+  persian_modal_date_picker:
     path: ../
 
 # For information on the generic Dart part of this file, see the

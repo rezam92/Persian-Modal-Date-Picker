@@ -74,13 +74,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  lint:
-    dependency: transitive
-    description:
-      name: lint
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.6.0"
   matcher:
     dependency: transitive
     description:
@@ -102,6 +95,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  persian_modal_date_picker:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
   shamsi_date:
     dependency: "direct dev"
     description:
@@ -109,13 +109,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.0"
-  shamsi_date_picker:
-    dependency: "direct dev"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -149,13 +142,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  styled_widget:
-    dependency: transitive
-    description:
-      name: styled_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.1+2"
   term_glyph:
     dependency: transitive
     description:
@@ -185,5 +171,5 @@ packages:
     source: hosted
     version: "2.1.0"
 sdks:
-  dart: ">=2.13.0 <3.0.0"
+  dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"

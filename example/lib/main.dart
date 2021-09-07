@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shamsi_date_picker/shamsi_date_picker.dart';
+import 'package:persian_modal_date_picker/persian_date_picker.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 void main() {

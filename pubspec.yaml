@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  styled_widget: ^0.3.1+2
   shamsi_date: ^0.15.0
   division: ^0.9.0
 
