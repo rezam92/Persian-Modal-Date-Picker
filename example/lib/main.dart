@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         Navigator.of(context).pop();
       },
-      forwardYear: YearDirection.both,
+      yearDirection: YearDirection.both,
       border: BorderRadius.only(
           topRight: Radius.circular(15), topLeft: Radius.circular(15)),
       validate: (ctx, date) {

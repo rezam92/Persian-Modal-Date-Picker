@@ -44,7 +44,7 @@ await showPersianDatePicker(
 |initMonth|int|No|As the same as `initYear`|
 |initDay|int|No|As the same as `initYear`|
 |border|BorderRadiusGeometry|No|Optional BorderRadius|
-|forwardYear|bool|No|show|
+|forwardYear|YearDirection|No|select year direction|
 |backgroundColor|Color|No||
 |margin|EdgeInsets|No||
 |submitButtonStyle|ButtonsStyle|No||
