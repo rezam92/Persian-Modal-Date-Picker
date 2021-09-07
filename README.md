@@ -10,7 +10,7 @@ ShamsiDatePicker is BottomModalSheet Jalali calendar which is used to select Jal
 
 <img src="./images/image.png" alt="image">
 
-##Usage
+## Usage
 ```
 await showPersianDatePicker(
       context,
@@ -33,8 +33,23 @@ await showPersianDatePicker(
       ),
     );
 ```
-##Properties
+## Parameters
+`showPersianDatePicker(context, onSubmit, {/* ohter optional parameter*/});`
 
+| Parameters |Type| Is Required      | Description |
+| ----------- |----| ----------- | ----------- |
+| context    | BuildContext | Yes ||
+| onSubmit   | Future<void> Function(BuildContext context, Jalali date) | Yes |Callback function when a date is selected|
+|initYear|int|No|Initial the **_Date Picker_** with optional date. Note that, this works when `initMonth` and `initDay` are provided.|
+|initMonth|int|No|As the same as `initYear`|
+|initDay|int|No|As the same as `initYear`|
+|border|BorderRadiusGeometry|No|Optional BorderRadius|
+|forwardYear|bool|No|show|
+|backgroundColor|Color|No||
+|margin|EdgeInsets|No||
+|submitButtonStyle|ButtonsStyle|No||
+|cancelButtonStyle|ButtonsStyle|No||
+|validate|bool Function(BuildContext context, Jalali date)|No||
 ## Getting Started
 
 This project is a starting point for a Dart

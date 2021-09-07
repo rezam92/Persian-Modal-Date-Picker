@@ -5,6 +5,11 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 import 'button.dart';
 
+enum YearDirection{
+  backward,
+  forward,
+  both,
+}
 ButtonsStyle get defaultButtonsStyle => const ButtonsStyle(
       backgroundColor: Colors.white,
       textColor: Colors.black,
@@ -17,10 +22,10 @@ Future showPersianDatePicker(
   BuildContext context,
   Future<void> Function(BuildContext context, Jalali date) onSubmit, {
   final int? initYear,
-  final int? initDay,
   final int? initMonth,
+  final int? initDay,
   final BorderRadiusGeometry? border,
-  final bool forwardYear = false,
+  final YearDirection forwardYear = YearDirection.backward,
   final Color backgroundColor = Colors.white,
   final EdgeInsets margin = EdgeInsets.zero,
   final ButtonsStyle submitButtonStyle = const ButtonsStyle(
@@ -92,7 +97,7 @@ class DatePickerModal extends StatefulWidget {
   final int? initYear;
   final int? initDay;
   final int? initMonth;
-  final bool forwardYear;
+  final YearDirection forwardYear;
   final Color? backgroundColor;
   final EdgeInsets? margin;
   final BorderRadiusGeometry? border;
@@ -105,7 +110,7 @@ class DatePickerModal extends StatefulWidget {
     Key? key,
     @required this.onSubmit,
     this.validate,
-    this.forwardYear = false,
+    this.forwardYear = YearDirection.backward,
     this.initYear,
     this.initDay,
     this.initMonth,
@@ -150,18 +155,24 @@ class _DatePickerModalState extends State<DatePickerModal> {
         initialItem: (widget.initDay ?? Jalali.now().day) - 1);
     monthController = FixedExtentScrollController(
         initialItem: (widget.initMonth ?? Jalali.now().month) - 1);
-    if (widget.forwardYear)
+
+    if (widget.forwardYear == YearDirection.forward)
       yearController = FixedExtentScrollController(initialItem: 0);
-    else
+    else if (widget.forwardYear == YearDirection.both){
       yearController = FixedExtentScrollController(
-        initialItem: (120 -
-                    (Jalali.now().year -
-                        (widget.initYear ?? Jalali.now().year))) >
+        initialItem: 100,
+      );
+    }
+    else {
+      yearController = FixedExtentScrollController(
+        initialItem: (100 -
+                    (Jalali.now().year - (widget.initYear ?? Jalali.now().year))) >
                 0
-            ? (120 -
+            ? (100 -
                 (Jalali.now().year - (widget.initYear ?? Jalali.now().year)))
             : 0,
       );
+    }
 
     jalali = Jalali(
         widget.initYear ?? Jalali.now().year,
@@ -173,7 +184,7 @@ class _DatePickerModalState extends State<DatePickerModal> {
 
   String format(Date d) {
     final formatter = d.formatter;
-    return '${formatter.wN} ${formatter.d} ${formatter.mN} ${formatter.yy}';
+    return '${formatter.wN} ${formatter.d} ${formatter.mN} ${formatter.yyyy}';
   }
 
   @override
@@ -292,24 +303,21 @@ class _DatePickerModalState extends State<DatePickerModal> {
                           onSelectedItemChanged: (value) {
                             setState(() {
                               dayController?.jumpTo(1);
-                              if (widget.forwardYear) {
+                              if (widget.forwardYear == YearDirection.forward) {
                                 jalali = jalali
                                     .withYear((Jalali.now().year) + value);
                                 return;
                               }
                               jalali = jalali
-                                  .withYear((Jalali.now().year - 120) + value);
+                                  .withYear((Jalali.now().year - 100) + value);
                             });
                           },
-                          childCount: widget.forwardYear ? 10 : 121,
+                          childCount: widget.forwardYear == YearDirection.both ? 201 : 101,
                           itemBuilder: (context, index) => Container(
                             height: 20,
                             alignment: Alignment.center,
                             child: Text(
-                                ((widget.forwardYear
-                                            ? Jalali.now().year
-                                            : (Jalali.now().year - 120)) +
-                                        index)
+                                ((widget.forwardYear == YearDirection.forward ? Jalali.now().year : (Jalali.now().year - 100)) + index)
                                     .toString(),
                                 style: Theme.of(context)
                                     .textTheme
