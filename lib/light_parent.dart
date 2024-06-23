@@ -26,7 +26,6 @@ class BackgroundModel with ChangeNotifier {
     notifyListeners();
   }
 
-
   void hex(String hex) {
     final buffer = StringBuffer();
     if (hex.length == 6 || hex.length == 7) buffer.write('ff');
