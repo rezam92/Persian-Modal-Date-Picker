@@ -2,21 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-import 'button.dart';
+import 'button_style.dart';
 
 enum YearDirection {
   backward,
   forward,
   both,
 }
-
-ButtonsStyle get defaultButtonsStyle => const ButtonsStyle(
-      backgroundColor: Colors.white,
-      textColor: Colors.black,
-      radius: 5,
-      visible: true,
-      text: '',
-    );
 
 Future showPersianDatePicker(
   BuildContext context,
@@ -117,20 +109,8 @@ class DatePickerModal extends StatefulWidget {
     this.border,
     this.backgroundColor,
     this.margin,
-    this.submitButtonStyle = const ButtonsStyle(
-      backgroundColor: Colors.white,
-      textColor: Colors.black,
-      radius: 5,
-      text: 'تایید',
-      visible: true,
-    ),
-    this.cancelButtonStyle = const ButtonsStyle(
-      backgroundColor: Colors.white,
-      textColor: Colors.black,
-      radius: 5,
-      text: 'انصراف',
-      visible: true,
-    ),
+    this.submitButtonStyle = const ButtonsStyle(radius: 5, text: 'تایید', visible: true),
+    this.cancelButtonStyle = const ButtonsStyle(radius: 5, text: 'انصراف', visible: true),
   }) : assert(onSubmit != null);
 
   @override
@@ -151,10 +131,8 @@ class _DatePickerModalState extends State<DatePickerModal> {
 
   @override
   void initState() {
-    dayController = FixedExtentScrollController(
-        initialItem: (widget.initDay ?? Jalali.now().day) - 1);
-    monthController = FixedExtentScrollController(
-        initialItem: (widget.initMonth ?? Jalali.now().month) - 1);
+    dayController = FixedExtentScrollController(initialItem: (widget.initDay ?? Jalali.now().day) - 1);
+    monthController = FixedExtentScrollController(initialItem: (widget.initMonth ?? Jalali.now().month) - 1);
 
     if (widget.yearDirection == YearDirection.forward)
       yearController = FixedExtentScrollController(initialItem: 0);
@@ -164,19 +142,13 @@ class _DatePickerModalState extends State<DatePickerModal> {
       );
     } else {
       yearController = FixedExtentScrollController(
-        initialItem: (100 -
-                    (Jalali.now().year -
-                        (widget.initYear ?? Jalali.now().year))) >
-                0
-            ? (100 -
-                (Jalali.now().year - (widget.initYear ?? Jalali.now().year)))
+        initialItem: (100 - (Jalali.now().year - (widget.initYear ?? Jalali.now().year))) > 0
+            ? (100 - (Jalali.now().year - (widget.initYear ?? Jalali.now().year)))
             : 0,
       );
     }
 
-    jalali = Jalali(
-        widget.initYear ?? Jalali.now().year,
-        widget.initMonth ?? Jalali.now().month,
+    jalali = Jalali(widget.initYear ?? Jalali.now().year, widget.initMonth ?? Jalali.now().month,
         widget.initDay ?? Jalali.now().day);
     // loading = widget.loading;
     super.initState();
@@ -206,7 +178,7 @@ class _DatePickerModalState extends State<DatePickerModal> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   format(jalali),
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
@@ -218,17 +190,10 @@ class _DatePickerModalState extends State<DatePickerModal> {
                   children: <Widget>[
                     Text(
                       'تاریخ انتخاب شده صحیح نیست',
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.red,
                           ),
                     )
-                  ],
-                ),
-              if (widget.validate == null || widget.validate!(context, jalali))
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(''),
                   ],
                 ),
               Divider(thickness: 1),
@@ -254,10 +219,7 @@ class _DatePickerModalState extends State<DatePickerModal> {
                             alignment: Alignment.center,
                             child: Text(
                               '${index + 1}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  ?.copyWith(fontSize: 16, color: Colors.black),
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16, color: Colors.black),
                             ),
                           ),
                         ),
@@ -283,10 +245,7 @@ class _DatePickerModalState extends State<DatePickerModal> {
                             alignment: Alignment.center,
                             child: Text(
                               monthTitle(jalali.copy(month: index + 1, day: 1)),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  ?.copyWith(fontSize: 16, color: Colors.black),
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16, color: Colors.black),
                             ),
                           ),
                         ),
@@ -303,19 +262,14 @@ class _DatePickerModalState extends State<DatePickerModal> {
                           onSelectedItemChanged: (value) {
                             setState(() {
                               dayController?.jumpTo(1);
-                              if (widget.yearDirection ==
-                                  YearDirection.forward) {
-                                jalali = jalali
-                                    .withYear((Jalali.now().year) + value);
+                              if (widget.yearDirection == YearDirection.forward) {
+                                jalali = jalali.withYear((Jalali.now().year) + value);
                                 return;
                               }
-                              jalali = jalali
-                                  .withYear((Jalali.now().year - 100) + value);
+                              jalali = jalali.withYear((Jalali.now().year - 100) + value);
                             });
                           },
-                          childCount: widget.yearDirection == YearDirection.both
-                              ? 201
-                              : 101,
+                          childCount: widget.yearDirection == YearDirection.both ? 201 : 101,
                           itemBuilder: (context, index) => Container(
                             height: 20,
                             alignment: Alignment.center,
@@ -325,11 +279,8 @@ class _DatePickerModalState extends State<DatePickerModal> {
                                             : (Jalali.now().year - 100)) +
                                         index)
                                     .toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.copyWith(
-                                        fontSize: 16, color: Colors.black)),
+                                style:
+                                    Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16, color: Colors.black)),
                           ),
                         ),
                       ),
@@ -339,16 +290,13 @@ class _DatePickerModalState extends State<DatePickerModal> {
               ),
               Row(
                 children: [
-                  if (!widget.submitButtonStyle.visible)
-                    Expanded(flex: 1, child: Container()),
+                  if (!widget.submitButtonStyle.visible) Expanded(flex: 1, child: Container()),
                   if (widget.submitButtonStyle.visible)
                     Expanded(
                       flex: 1,
-                      child: Button(
-                        onPress: () async {
-                          if (widget.validate != null &&
-                              !widget.validate!(context, jalali)) return;
-
+                      child: FilledButton(
+                        onPressed: () async {
+                          if (widget.validate != null && !widget.validate!(context, jalali)) return;
                           setState(() {
                             loading = true;
                           });
@@ -357,37 +305,40 @@ class _DatePickerModalState extends State<DatePickerModal> {
                             loading = false;
                           });
                         },
-                        verticalPadding: 10,
-                        radius: widget.submitButtonStyle.radius,
-                        backgroundColor:
-                            widget.submitButtonStyle.backgroundColor,
+                        style: FilledButton.styleFrom(
+                          backgroundColor: widget.submitButtonStyle.backgroundColor ?? Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(widget.submitButtonStyle.radius),
+                          ),
+                        ),
                         child: Text(
                           (widget.submitButtonStyle.text as String),
-                          style: Theme.of(context).textTheme.button?.copyWith(
-                                color: widget.submitButtonStyle.textColor,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          // style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          //       color: widget.submitButtonStyle.textColor,
+                          //       fontWeight: FontWeight.bold,
+                          //     ),
                         ),
                       ),
                     ),
-                  if (!widget.cancelButtonStyle.visible)
-                    Expanded(flex: 1, child: Container()),
+                  if (!widget.cancelButtonStyle.visible) Expanded(flex: 1, child: Container()),
                   if (widget.cancelButtonStyle.visible)
                     Expanded(
                       flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 12.0),
-                        child: Button(
-                          onPress: () {
+                        child: FilledButton(
+                          onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          verticalPadding: 10,
-                          radius: widget.cancelButtonStyle.radius,
-                          backgroundColor:
-                              widget.cancelButtonStyle.backgroundColor,
+                          style: FilledButton.styleFrom(
+                            backgroundColor: widget.cancelButtonStyle.backgroundColor ?? Colors.grey[100]!,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(widget.cancelButtonStyle.radius),
+                            ),
+                          ),
                           child: Text(
                             (widget.cancelButtonStyle.text as String),
-                            style: Theme.of(context).textTheme.button?.copyWith(
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                   color: widget.cancelButtonStyle.textColor,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -396,7 +347,7 @@ class _DatePickerModalState extends State<DatePickerModal> {
                       ),
                     ),
                 ],
-              )
+              ),
             ],
           ),
         ),
